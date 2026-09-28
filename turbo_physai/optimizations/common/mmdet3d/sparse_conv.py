@@ -19,9 +19,9 @@
 
 
 def _ops():
-    from turbo_physai import ops
+    from turbo_physai import _C
 
-    return ops
+    return _C
 
 
 def _conv_output_size(input_size, kernel_size, stride, padding, dilation):

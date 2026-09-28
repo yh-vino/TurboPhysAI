@@ -22,9 +22,9 @@ _NATIVE_BEV_POOL_AUTOGRAD = None
 
 
 def _ops():
-    from turbo_physai import ops
+    from turbo_physai import _C
 
-    return ops
+    return _C
 
 
 def _native_bev_pool_autograd():

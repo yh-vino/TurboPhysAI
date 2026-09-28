@@ -19,9 +19,9 @@
 
 
 def _ops():
-    from turbo_physai import ops
+    from turbo_physai import _C
 
-    return ops
+    return _C
 
 
 def voxelization_forward(

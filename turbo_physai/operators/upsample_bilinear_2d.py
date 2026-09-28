@@ -6,7 +6,7 @@
 import torch
 from torch.autograd import Function
 from torch.autograd.function import once_differentiable
-from turbo_physai.ops import upsample_bilinear_2d_forward, upsample_bilinear_2d_backward
+from turbo_physai._C import upsample_bilinear_2d_forward, upsample_bilinear_2d_backward
 from typing import Callable, List, Optional, Tuple, Union
 
 Tensor = torch.Tensor

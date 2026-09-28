@@ -3,10 +3,12 @@
 # SPDX-License-Identifier: BSD-3-Clause
 # Copyright 2026 Hygon Information Technology Co., Ltd.
 # Modified by Hygon.
+import warnings
+
 import torch
 from torch.autograd import Function
 from torch.autograd.function import once_differentiable
-from turbo_physai.ops import grid_sample_forward, grid_sample_backward
+from turbo_physai._C import grid_sample_forward, grid_sample_backward
 from typing import Callable, List, Optional, Tuple, Union
 
 Tensor = torch.Tensor

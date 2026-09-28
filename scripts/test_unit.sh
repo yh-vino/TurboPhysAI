@@ -7,4 +7,5 @@ export PYTHONPATH="${PYTHONPATH:-}:$(pwd)"
 python -m pytest -m "not hcu" \
   test/engine \
   test/test_runner.py \
+  test/test_operator_api.py \
   test/optimizations
