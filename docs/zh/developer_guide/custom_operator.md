@@ -93,7 +93,7 @@ Python 前端负责将原生接口组织成稳定、可测试的 Python 能力�
 | 能力范围                       | 代码位置                                          | 仓库案例                    |
 | ------------------------------ | ------------------------------------------------- | --------------------------- |
 | 可由用户直接调用的通用算子 API | `turbo_physai/operators/`                        | `_grid_sample.py`          |
-| 仅用于某个公共框架入口的优化   | `turbo_physai/optimizations/common/<framework>/` | `mmdet3d/bev_pool.py`     |
+| 公共框架入口适配与专用优化     | `turbo_physai/optimizations/common/<framework>/` | `mmdet3d/bev_pool.py`     |
 | 依赖具体模型计算链路的实现     | `turbo_physai/optimizations/models/<model>/`     | 模型专用 Forward 或 Wrapper |
 
 ### 3.1 通用算子 API：GridSample
@@ -136,30 +136,18 @@ class GridSampleFunction(torch.autograd.Function):
 
 ### 3.2 公共框架优化：BEV Pool
 
-BEV Pool 的 Python 前端位于 `turbo_physai/optimizations/common/mmdet3d/bev_pool.py`。它延迟获取 `turbo_physai._C`，并在 Python 层完成连续内存处理和参数类型转换：
+BEV Pool 的通用实现位于 `turbo_physai/operators/_bev_pool.py`，负责排序、参数转换和 Autograd。`turbo_physai/optimizations/common/mmdet3d/bev_pool.py` 保留框架入口签名，调用公共算子接口：
 
 ```python
-def _ops():
-    from turbo_physai import _C
+def bev_pool(feats, coords, B, D, H, W, ranks=None):
+    from turbo_physai import operators
 
-    return _C
-
-
-def bev_pool_prepare(geom_feats, bx, dx, nx, B, D, H, W):
-    extension = _ops()
-    return extension.bev_pool_prepare(
-        geom_feats.contiguous(),
-        bx.contiguous(),
-        dx.contiguous(),
-        nx.contiguous(),
-        int(B),
-        int(D),
-        int(H),
-        int(W),
-    )
+    return operators.bev_pool(feats, coords, B, D, H, W, ranks)
 ```
 
-同一文件中的 `NativeQuickCumsumCuda` 使用 `torch.autograd.Function` 连接 `bev_pool_forward` 和 `bev_pool_backward`。延迟导入用于避免仅加载优化声明时提前加载原生扩展；算子首次被实际调用时，Python 前端才访问 `turbo_physai._C`。
+体素化和稀疏卷积索引生成采用相同分层：框架适配层分别调用 `operators.voxelize` 和 `operators.get_indice_pairs`。原生扩展调用集中在 `operators/` 中；针对框架 `QuickCumsum` 入口的替换保留在 `common/mmdet3d/` 中。
+
+适配层在执行时访问公共算子接口，避免仅加载优化声明时提前加载 Torch 或原生扩展。
 
 ## 4. 声明优化 Group
 

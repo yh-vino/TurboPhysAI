@@ -17,7 +17,9 @@ output = grid_sample(input, grid, align_corners=False)
 - `grid_sample`、`interpolate`；
 - `modulated_deform_conv2d`、`ModulatedDeformConv2dFunction`；
 - `deformable_aggregation_function`、`DeformableAggregationFunction`；
-- `ms_deform_attn_forward`、`ms_deform_attn_backward`。
+- `ms_deform_attn_forward`、`ms_deform_attn_backward`；
+- `bev_pool`、`bev_pool_prepare`、`bev_pool_prepare_geometry`；
+- `voxelize`、`get_indice_pairs`。
 
 仅导入 `turbo_physai.operators` 不会加载算子依赖；首次访问具体接口时才加载对应实现。原生扩展 `turbo_physai._C` 供内部封装使用。
 

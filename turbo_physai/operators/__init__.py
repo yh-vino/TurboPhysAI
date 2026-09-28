@@ -8,6 +8,15 @@ from typing import Any
 
 
 _OPERATORS = {
+    "bev_pool": ("turbo_physai.operators._bev_pool", "bev_pool"),
+    "bev_pool_prepare": ("turbo_physai.operators._bev_pool", "bev_pool_prepare"),
+    "bev_pool_prepare_geometry": (
+        "turbo_physai.operators._bev_pool", "bev_pool_prepare_geometry",
+    ),
+    "voxelize": ("turbo_physai.operators.voxelization", "voxelize"),
+    "get_indice_pairs": (
+        "turbo_physai.operators.sparse_conv", "get_indice_pairs",
+    ),
     "ModulatedDeformConv2dFunction": (
         "turbo_physai.operators.modulated_deform_conv",
         "ModulatedDeformConv2dFunction",
