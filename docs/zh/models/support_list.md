@@ -14,3 +14,9 @@ TurboPhysAI 不强制模型仓库停留在优化接入基线（[可以在优化�
 | BEVFusion |   BEVFusion   |    —    | `326653dc06e0938edf1aae7d01efcd158ba83de5` | [BEVFusion](../../../model_examples/BEVFusion/README.md) |
 
 **自动驾驶**、**具身智能**和**世界模型**等方向的模型适配工作持续推进中，请关注后续更新。
+
+## 接入验证中的模型
+
+| 模型 | 优化接入基线 | 验证范围 | 使用说明 |
+| --- | --- | --- | --- |
+| LoopWAM | `0bdcad41fcf274bffadad6e9af4f2aadfc4cde61` | 算子与合成小模型验证；完整模型精度、性能和长稳仍需验证 | [LoopWAM](../../../model_examples/LoopWAM/README.md) |

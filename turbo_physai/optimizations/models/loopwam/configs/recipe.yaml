@@ -1,0 +1,30 @@
+# Copyright 2026 Hygon Information Technology Co., Ltd.
+# SPDX-License-Identifier: BSD-3-Clause
+schema_version: turbophysai/optimization-config/v1
+kind: OptimizationConfig
+metadata:
+  id: model.loopwam.base.hcu
+  version: "1.0.0"
+  description: LoopWAM BW1000 training optimizations
+model:
+  name: LoopWAM
+optimization_modules:
+  - turbo_physai.optimizations.models.loopwam.catalog
+compatibility: {}
+optimization_groups:
+  - id: loopwam.initialization_barrier
+  - id: loopwam.dataset_columns
+  - id: loopwam.dataset_cache
+  - id: loopwam.vae_channels_last
+  - id: loopwam.masked_flash_attention
+  - id: loopwam.rmsnorm
+  - id: loopwam.zero1_node_sharding
+    options:
+      shard_nodes: 4
+  - id: loopwam.zero1_deferred_gather
+    options:
+      skip_bit16_rebind: true
+  - id: loopwam.zero1_grad_overlap
+  - id: loopwam.fused_metrics
+    options:
+      benchmark_warmup_steps: 50

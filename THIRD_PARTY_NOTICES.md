@@ -146,3 +146,33 @@ All previously identified source files now have a direct upstream path and a fix
 ## Hygon modification notice
 
 Where Apache-2.0 source code was modified, the source file retains the upstream copyright and license notice, then adds Hygon copyright and `Modified by Hygon.`. The notice does not change the upstream license.
+
+### LoopWAM bundled LeRobot dataset
+
+- Repository: <https://github.com/loop-wam/LoopWAM>
+- Fixed commit: `0bdcad41fcf274bffadad6e9af4f2aadfc4cde61`
+- Direct upstream file: `src/fastwam/datasets/lerobot/lerobot/lerobot_dataset.py`
+- License: Apache-2.0, as stated in that source file (HuggingFace, 2024).
+- Local derivative: `turbo_physai/optimizations/models/loopwam/data.py`.
+- Modifications: extract selected dataset methods; defer model imports; accept
+  iterable HF columns; avoid unused timestamp materialization; serialize Arrow
+  cache creation and publish a shared manifest. The original notice and a
+  Hygon modification notice are retained. License text:
+  `third_party/licenses/Apache-2.0.txt`.
+
+LoopWAM communication optimizations (`deferred_gather.py`, `grad_overlap.py`,
+`zero1_sharding.py`, `zero1_compat.py`) are migrated from the HCU delivery
+implementation at `0a610c7093e78059720e9088294481b40aa5d085` (based on the
+LoopWAM baseline above). They use the installed DeepSpeed implementation at
+runtime and verify supported package versions and relevant method sources.
+
+The gradient bucket scheduling in `grad_overlap.py` and the DeepSpeed method
+adaptations in `zero1_sharding.py` derive from Microsoft DeepSpeed's
+`deepspeed/runtime/zero/stage_1_and_2.py`, release versions `0.18.4`
+(`b35d9eb01bc04e774cc05dc43713f2a41423da5c`) and `0.19.2`
+(`b919284ab1ad6dbc1cb0e06b10386ff74160b586`) from
+<https://github.com/deepspeedai/DeepSpeed> (Apache-2.0, Copyright (c) Microsoft
+Corporation, DeepSpeed Team).
+These files retain the Microsoft notice, carry a Hygon modification notice,
+and use Apache-2.0. The bundled license text is
+`third_party/licenses/Apache-2.0.txt`.

@@ -1,0 +1,15 @@
+# Copyright 2026 Hygon Information Technology Co., Ltd.
+# SPDX-License-Identifier: BSD-3-Clause
+schema_version: turbophysai/runtime-config/v1
+kind: RuntimeConfig
+environment:
+  set:
+    MIOPEN_FIND_MODE: "1"
+    PYTORCH_MIOPEN_SUGGEST_NHWC: "1"
+    PYTORCH_MIOPEN_SUGGEST_NDHWC: "1"
+    GPU_MAX_HW_QUEUES: "8"
+    OMP_NUM_THREADS: "8"
+    MKL_NUM_THREADS: "8"
+  unset: []
+process:
+  numa: true

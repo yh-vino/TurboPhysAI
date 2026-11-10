@@ -1,0 +1,148 @@
+# Copyright 2026 Hygon Information Technology Co., Ltd.
+# SPDX-License-Identifier: BSD-3-Clause
+
+schema_version: turbophysai/optimization-config/v1
+kind: OptimizationConfig
+metadata:
+  id: model.loopwam.base.hcu
+  version: 1.0.0
+  description: LoopWAM BW1000 training optimizations
+model:
+  name: LoopWAM
+compatibility:
+  commits:
+  - 0bdcad41fcf274bffadad6e9af4f2aadfc4cde61
+optimization_groups:
+- id: loopwam.initialization_barrier
+  enabled: true
+  options: {}
+  trust:
+    source_hashes:
+      fastwam.trainer.Accelerator:
+      - source-v1:395c974036dd515c4ff0aa6c1ecc60b56e2708b05bf79524d163c0b5ce20b5ea
+    ast_hashes:
+      fastwam.trainer.Accelerator:
+      - ast-v1:0bb5eff4011b8cb68d8348b2d454f4387f64aa2cf95d7569f8cb3b1861c35da4
+- id: loopwam.dataset_columns
+  enabled: true
+  options: {}
+  trust:
+    source_hashes:
+      fastwam.datasets.lerobot.lerobot.lerobot_dataset.LeRobotDataset.__init__:
+      - source-v1:e1a221127c2b693b7132c092747781fd839b9dcac7e748bc4635e8a6b2032cc8
+      fastwam.datasets.lerobot.lerobot.lerobot_dataset.LeRobotDataset._get_query_timestamps:
+      - source-v1:b6808946e5bfac4efaafe939164d5087df99fa9e26f86c82f7ab56591bf4a3f1
+      fastwam.datasets.lerobot.lerobot.lerobot_dataset.LeRobotDataset._query_hf_dataset:
+      - source-v1:f954fd76a9a252619af751152eafae81d8e9277c5352e8e2a9d31e90d63229af
+      fastwam.datasets.lerobot.lerobot.lerobot_dataset.LeRobotDataset._query_hf_dataset_fast:
+      - source-v1:bd7705c9be597642da53517e288065c28cc69a74b459f57a501b05bf380ebff2
+      fastwam.datasets.lerobot.lerobot.lerobot_dataset.LeRobotDataset.get_episode_data:
+      - source-v1:b2fb9e0b3621f8310378462c9fe36dd067ff533eb1f0ea7123d38ab322fb67b9
+    ast_hashes:
+      fastwam.datasets.lerobot.lerobot.lerobot_dataset.LeRobotDataset.__init__:
+      - ast-v1:7bc8dc2e8f99c9ec71a2ebd8c96d9b310cd51a93f4141feac10f38909bf9dda6
+      fastwam.datasets.lerobot.lerobot.lerobot_dataset.LeRobotDataset._get_query_timestamps:
+      - ast-v1:1633c9fed3757775515b4da4c223ca82da3e9a947e2ce8f1843670fd825c706a
+      fastwam.datasets.lerobot.lerobot.lerobot_dataset.LeRobotDataset._query_hf_dataset:
+      - ast-v1:e4fb1510a55f85d948052e3daaf540935a194f783f173620fae83c27e3b6c9aa
+      fastwam.datasets.lerobot.lerobot.lerobot_dataset.LeRobotDataset._query_hf_dataset_fast:
+      - ast-v1:e107949a63ee783a45a3845f9c58a9484b3748847c76d96cc2855628e971a218
+      fastwam.datasets.lerobot.lerobot.lerobot_dataset.LeRobotDataset.get_episode_data:
+      - ast-v1:a1cf4e3e5b66c11cc5fa193eb63a4bcbb7ba74ea6ab1d363dc1baba1856ac99a
+- id: loopwam.dataset_cache
+  enabled: true
+  options: {}
+  trust:
+    source_hashes:
+      fastwam.datasets.lerobot.lerobot.lerobot_dataset.LeRobotDataset.load_hf_dataset:
+      - source-v1:57e5bc49ab9cf1b026bb36c63291dcf74e1bf26e2266da3b83256db969ffadda
+    ast_hashes:
+      fastwam.datasets.lerobot.lerobot.lerobot_dataset.LeRobotDataset.load_hf_dataset:
+      - ast-v1:ff02aa4994c907bce89f6beeef17e946191161c32f1554fbe565db64087528b8
+- id: loopwam.vae_channels_last
+  enabled: true
+  options: {}
+  trust:
+    source_hashes:
+      fastwam.models.wan22.wan_video_vae.CausalConv3d.forward:
+      - source-v1:3e219cf77fc12f5b5939813e8bfb204a6b4b43bed4ed16b0bc83f5b1f5289e26
+    ast_hashes:
+      fastwam.models.wan22.wan_video_vae.CausalConv3d.forward:
+      - ast-v1:204ccbc3f8a60164178764a642f4b8973286b770afae54fc2a2f906765f710fa
+- id: loopwam.masked_flash_attention
+  enabled: true
+  options: {}
+  trust:
+    source_hashes:
+      fastwam.models.wan22.mot.MoT._mixed_attention:
+      - source-v1:a5838525ac55cf4f2d7f4a07a6fd1100fe75c1582e421cf018c2a12a98adaa74
+    ast_hashes:
+      fastwam.models.wan22.mot.MoT._mixed_attention:
+      - ast-v1:144ace0b96143dafc596af8b66e58f926bd5d6c69006a82814011a10aba4985a
+- id: loopwam.rmsnorm
+  enabled: true
+  options: {}
+  trust:
+    source_hashes:
+      fastwam.models.wan22.wan_video_dit.RMSNorm.forward:
+      - source-v1:a3b01f6245235a21fd2df97229ab63d3cdf248f3632287f95efcde1345664107
+    ast_hashes:
+      fastwam.models.wan22.wan_video_dit.RMSNorm.forward:
+      - ast-v1:0aa684f53dd8c142420523c20d0199f1b1936abf5e41a007d5ab5c916c7d4f5d
+- id: loopwam.zero1_node_sharding
+  enabled: true
+  options:
+    shard_nodes: 4
+  trust:
+    source_hashes:
+      accelerate.accelerator.Accelerator.prepare:
+      - source-v1:635b419cc835ab7593a48c3e266785090b0bf78b549f38e10055d389894a47b1
+    ast_hashes:
+      accelerate.accelerator.Accelerator.prepare:
+      - ast-v1:4c6bf2efb48649b8772c9f9ed16f0544efec7d5a2ee2c6e312e1ab5e0dfc5c7d
+- id: loopwam.zero1_deferred_gather
+  enabled: true
+  options:
+    skip_bit16_rebind: true
+  trust:
+    source_hashes:
+      fastwam.trainer.Wan22Trainer._set_dit_only_train_mode:
+      - source-v1:d7a7cce9a86377368f1d68dccbb68095c7514d168e73951e93b6eee56cbb4782
+      fastwam.models.wan22.mot.MoT._build_expert_attention_io:
+      - source-v1:e1246fa0303e599d1aeb7dc4135d95c2efc202225863b602f88f97d27edec69e
+      fastwam.trainer.Wan22Trainer.evaluate:
+      - source-v1:572c19b4adaf5c3a68baaac013f5848cb3345ee60053e4c1cc420ae045e1dc6c
+      fastwam.trainer.Wan22Trainer.save_checkpoint:
+      - source-v1:96f7fa7ccc71bdc9b75b1f781af83159361d298a885e88b59fa87b99cc20269b
+    ast_hashes:
+      fastwam.trainer.Wan22Trainer._set_dit_only_train_mode:
+      - ast-v1:50dd9b0e0b765aaec9a0421889a62430f71c1ea15d9527e56f47a5df835fb4c7
+      fastwam.models.wan22.mot.MoT._build_expert_attention_io:
+      - ast-v1:f7b734d6a67aa9f0b9554c44491f9e881c4ef204df9ebd55943e9a3fa9e4daa9
+      fastwam.trainer.Wan22Trainer.evaluate:
+      - ast-v1:8c39593992952e00ad382324c82ebf276fbb981cd0ce4a10732fe35c3fc4d3c8
+      fastwam.trainer.Wan22Trainer.save_checkpoint:
+      - ast-v1:2894fd193c9922882783d928b95d23f7eabddf4e8202c50842088bcf7a409146
+- id: loopwam.zero1_grad_overlap
+  enabled: true
+  options: {}
+  trust:
+    source_hashes:
+      fastwam.trainer.Wan22Trainer.__init__:
+      - source-v1:c3e123559802bd8d441eaec8985a58aadbf76a3b0a4a9cce95f0f769bf2fae8e
+    ast_hashes:
+      fastwam.trainer.Wan22Trainer.__init__:
+      - ast-v1:da6be6537deeac36be1c3b6961b5999e1af9f1714c2f0496454ad55c3f6eaea6
+- id: loopwam.fused_metrics
+  enabled: true
+  options:
+    benchmark_warmup_steps: 50
+  trust:
+    source_hashes:
+      fastwam.trainer.Wan22Trainer.train:
+      - source-v1:488bcbf0d61b283b6fa1af0d8987b51af85d3cb1e610060c89aa5c2647dcaae8
+    ast_hashes:
+      fastwam.trainer.Wan22Trainer.train:
+      - ast-v1:a9c686d289801db154d67676ab7b86585752dab9fc1a72195c4dd39b1cc39c3e
+optimization_modules:
+- turbo_physai.optimizations.models.loopwam.catalog
