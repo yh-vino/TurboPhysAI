@@ -35,7 +35,7 @@ python -m pytest -q test/engine --ignore=test/engine/test_bevfusion.py
 HCU 测试入口为
 [`loopwam_hcu_smoke.py`](../../test/optimizations/loopwam_hcu_smoke.py) 和
 [`loopwam_trainer_smoke.py`](../../test/optimizations/loopwam_trainer_smoke.py)，
-启动命令见[接入说明](README.md#验证)。
+启动命令见[优化开发说明](../../turbo_physai/optimizations/models/loopwam/README.md#验证)。
 
 ## 验证内容
 
